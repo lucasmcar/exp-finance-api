@@ -1,5 +1,5 @@
-export interface Receita {
-    idReceita?: number;
+export interface Despesa {
+    iddespesa?: number;
     valor: number;
     descricao: string;
     dataEntrada: Date;

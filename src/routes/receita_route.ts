@@ -42,6 +42,36 @@ router
     .post(authenticateJWT, receitaController.salvar)
 
 
+
+/**
+ * @swagger
+ * /api/v1/receitas/total:
+ *   get:
+ *     summary: Retorna total em saidas
+ *     tags: [Receitas]
+ *     responses:
+ *       200:
+ *         description: Total em receitas.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   valor:
+ *                     type: number
+ */
+router
+    .route('/api/v1/receita/total')
+    .get(authenticateJWT, receitaController.total)
+
+
+router
+    .route('/api/v1/receita/ultimos-tres-meses')
+    .get(authenticateJWT, receitaController.getLastMonths)
+
+
 /**
  * @swagger
  * /api/v1/receitas:
@@ -74,6 +104,3 @@ router
 
 
 export default router;
-
-/**, authenticateJWT , (req, res) => {
-        res.status(200).json({ message: "Acesso permitido a rota protegida!" })} */

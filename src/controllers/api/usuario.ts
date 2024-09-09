@@ -62,14 +62,16 @@ export class UsuarioController{
 
                 // Gerar token JWT
                 const token = jwt.sign(
-                    { id: usuario.id, email: usuario.email }, // Payload do token
+                    { id: usuario.idusuario, email: usuario.email }, // Payload do token
                     process.env.JWT_SECRET as string,         // Chave secreta
                     { expiresIn: '1h' }                       // Tempo de expiração
                 );
 
-                
+             
 
-                return res.status(200).json({ token }); // Retorna o token JWT
+                return res.status(200).json({ token,
+                    id: usuario.idusuario,
+                    nome: usuario.nome }); // Retorna o token JWT
             });
         } catch (error) {
             console.error('Erro ao realizar login:', error);

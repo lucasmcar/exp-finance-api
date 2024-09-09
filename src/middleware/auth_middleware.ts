@@ -5,7 +5,6 @@ import { Request, Response,  NextFunction } from 'express';
 const authenticateJWT = (req: Request, res: Response, next: any) => {
     const authHeader = req.headers['authorization'];
 
-    console.log(req);
 
     if (authHeader) {
         // O formato esperado é "Bearer <token>"
@@ -16,7 +15,7 @@ const authenticateJWT = (req: Request, res: Response, next: any) => {
                 return res.sendStatus(403); // Token inválido
             }
 
-            req.user = user;
+            req.user = user as { id: number; email: string; nome: string };;
             next();
         });
     } else {
