@@ -67,9 +67,37 @@ router
     .get(authenticateJWT, receitaController.total)
 
 
+/**
+ * @swagger
+ * /api/v1/receitas/ultimos-tres-meses:
+ *   get:
+ *     summary: Retorna o total dos ultimos 3 meses
+ *     tags: [Receitas]
+ *     responses:
+ *       200:
+ *         description: Total em receitas (Últimos 3 meses).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   total:
+ *                     type: number
+ *                   mes:
+ *                     type: number
+ */
+
+
 router
     .route('/api/v1/receita/ultimos-tres-meses')
     .get(authenticateJWT, receitaController.getLastMonths)
+
+
+router
+    .route('/api/v1/receita/categoria/:id')
+    .get(authenticateJWT, receitaController.totalReceitaPorCategoria)
 
 
 /**

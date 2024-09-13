@@ -42,6 +42,7 @@ export class UsuarioController{
 
         console.log(req.body)
 
+
         try {
             // Verifica se o usuário existe no banco de dados
             con.query("SELECT * FROM " +TABLE+ " WHERE email = ?", [email], async (err: any, results: any) => {
@@ -57,7 +58,7 @@ export class UsuarioController{
                 // Comparar a senha fornecida com a senha armazenada
                 const senhaValida = await bcrypt.compare(senha, usuario.senha);
                 if (!senhaValida) {
-                    return res.status(401).json({ error: "Usuário ou senha inválidos" });
+                    return res.status(401).json({ error: "Senha inválidos" });
                 }
 
                 // Gerar token JWT
