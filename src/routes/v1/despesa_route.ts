@@ -1,6 +1,6 @@
 import express from 'express';
-import { DespesaController } from '../controllers/api/despesa';
-import authenticateJWT from '../middleware/auth_middleware';
+import { DespesaController } from '../../controllers/api/v1/despesa';
+import authenticateJWT from '../../middleware/auth_middleware';
 
 
 
@@ -13,7 +13,7 @@ const despesaController = new DespesaController();
  * /api/v1/despesas:
  *   get:
  *     summary: Retorna todas as despesas
- *     tags: [Despesas]
+ *     tags: [Despesa]
  *     responses:
  *       200:
  *         description: Lista de Despesas.
@@ -39,6 +39,29 @@ router
     .get(authenticateJWT, despesaController.verTodasSaidas);
 
 
+/**
+ * @swagger
+ * /api/v1/despesas/total:
+ *   get:
+ *     summary: Retorna total em despesas
+ *     tags: [Despesa]
+ *     responses:
+ *       200:
+ *         description: Total em despesas.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   total:
+ *                     type: number
+ * 
+ */
+router
+    .route('/api/v1/despesas/total')
+    .get(authenticateJWT, despesaController.totalDespesa)
 
 /**
  * @swagger
@@ -67,13 +90,40 @@ router
  *     responses:
  *       200:
  *         description: Saída registrada com sucesso.
+ *       400:
+ *         description: Valor inserido não pode ser negativo
  *       500:
- *         description: Erro ao salvar a receita.
+ *         description: Erro ao salvar a despesa.
  */
 router
     .route('/api/v1/despesa/salvar')
     .post(authenticateJWT, despesaController.salvarDespesas);
 
+
+/**
+ * @swagger
+ * /api/v1/despesa/categoria/:id:
+ *   get:
+ *     summary: Retorna total da categoria da despesa
+ *     tags: [Despesa]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               total:
+ *                 type: number
+ *               nome:
+ *                 type: string
+ *                
+ *     responses:
+ *       200:
+ *         description: Sucesso.
+ *       500:
+ *         description: Erro ao retornar os dados.
+ */    
 router
     .route('/api/v1/despesa/categoria/:id')
     .get(authenticateJWT, despesaController.totalDespesaPorCategoria);

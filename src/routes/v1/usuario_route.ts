@@ -1,6 +1,6 @@
-import { UsuarioController } from "../controllers/api/usuario";
+import { UsuarioController } from "../../controllers/api/v1/usuario";
 import  express  from "express";
-import { Usuario } from "../models/usuario";
+import { Usuario } from "../../models/usuario";
 
 const router = express.Router();
 const usuarioController = new UsuarioController();

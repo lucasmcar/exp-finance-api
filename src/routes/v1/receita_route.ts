@@ -1,6 +1,6 @@
 import express from 'express';
-import { ReceitaController } from '../controllers/api/receita';
-import authenticateJWT from '../middleware/auth_middleware';
+import { ReceitaController } from '../../controllers/api/v1/receita';
+import authenticateJWT from '../../middleware/auth_middleware';
 
 
 const router = express.Router();
@@ -47,7 +47,7 @@ router
  * @swagger
  * /api/v1/receitas/total:
  *   get:
- *     summary: Retorna total em saidas
+ *     summary: Retorna total em entradas
  *     tags: [Receitas]
  *     responses:
  *       200:
@@ -59,7 +59,7 @@ router
  *               items:
  *                 type: object
  *                 properties:
- *                   valor:
+ *                   total:
  *                     type: number
  */
 router
@@ -88,11 +88,10 @@ router
  *                   mes:
  *                     type: number
  */
-
-
 router
     .route('/api/v1/receita/ultimos-tres-meses')
     .get(authenticateJWT, receitaController.getLastMonths)
+
 
 
 router

@@ -9,16 +9,17 @@ const options = {
     info: {
       title: 'Sua API',
       version: '1.0.0',
-      description: 'Documentação da API utilizando Swagger',
+      description: 'Documentação da API Exp Finance',
     },
     servers: [
       {
         url: 'http://localhost:3000/api/v1',
         description: 'Servidor local',
+        version: "1.0.0"
       },
     ],
   },
-  apis: ['./src/routes/*.ts'], // Caminho para os arquivos de rotas onde as anotações Swagger serão feitas
+  apis: ['./src/routes/v1/*.ts'], // Caminho para os arquivos de rotas onde as anotações Swagger serão feitas
 };
 
 const swaggerSpec = swaggerJsdoc(options);

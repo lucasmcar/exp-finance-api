@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { Despesa } from '../../models/despesa';
-import con from '../../../config/connection';
-import { QueryError, RowDataPacket } from 'mysql2';
+import { Despesa } from '../../../models/despesa';
+import con from '../../../../config/connection';
+import { RowDataPacket } from 'mysql2';
 
 const TABLE = 'despesa';
 
@@ -29,7 +29,6 @@ export class DespesaController{
                 return;
             }
             const total = result[0]?.total || 0;
-            console.log(total)
             return res.status(200).json(total); // Retorna o total como um único objeto
         });
     }
