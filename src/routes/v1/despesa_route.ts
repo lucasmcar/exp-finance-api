@@ -60,7 +60,7 @@ router
  * 
  */
 router
-    .route('/api/v1/despesas/total')
+    .route('/api/v1/despesa/total')
     .get(authenticateJWT, despesaController.totalDespesa)
 
 /**

@@ -9,7 +9,7 @@ export class ReceitaController {
 
     // Método para listar todos os registros de entradas
     verTodos(req: Request, res: Response): void {
-        con.query(`SELECT * FROM ${TABLE}`, (err, results) => {
+        con.query(`SELECT c.nome, r.idreceita, r.valor, r.descricao, r.data_receita FROM ${TABLE} r inner JOIN categoria c on r.idcategoria = c.idcategoria;`, (err, results: RowDataPacket[]) => {
             if (err) {
                 console.error('Error executing query:', err);
                 res.status(500).json({ error: 'An error occurred' });
@@ -32,7 +32,6 @@ export class ReceitaController {
                     res.status(500).json({ error: 'Error occurred' });
                     return;
                 }
-                console.log(result)
                 return res.status(200).json(result); // Retorna o total como um único objeto
             }
         )
@@ -41,8 +40,6 @@ export class ReceitaController {
 
     total(req: Request, res: Response){
         const userId = req.user?.id;
-
-        console.log(userId)
         
         con.query(`SELECT sum(valor) AS total FROM ${TABLE} WHERE idusuario = ?`,[userId], (err, result: RowDataPacket[]) => {
             if (err) {
@@ -86,7 +83,7 @@ export class ReceitaController {
         const receita: Receita = {
             valor,
             descricao,
-            dataEntrada : new Date(),
+            data_receita : new Date(),
             idcategoria,
             idusuario,
         };
@@ -98,7 +95,7 @@ export class ReceitaController {
             [
                 receita.valor,
                 receita.descricao,
-                receita.dataEntrada,
+                receita.data_receita,
                 receita.idcategoria,
                 receita.idusuario
             ],

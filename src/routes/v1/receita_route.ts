@@ -24,7 +24,7 @@ const receitaController = new ReceitaController();
  *                 type: number
  *               descricao:
  *                 type: string
- *               dataEntrada:
+ *               data_receita:
  *                 type: string
  *                 format: date-time
  *               idCategoria:
@@ -121,7 +121,7 @@ router
  *                     type: number
  *                   descricao:
  *                     type: string
- *                   dataEntrada:
+ *                   data_receita:
  *                     type: string
  *                     format: date-time
  */

@@ -2,7 +2,7 @@ export interface Receita {
     idReceita?: number;
     valor: number;
     descricao: string;
-    dataEntrada: Date;
+    data_receita: Date;
     idcategoria: number;
     idusuario: number;
 }
